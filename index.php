@@ -18,7 +18,6 @@ include "layout/side.php";
 	} else {
 		include "page/dashboard.php";
 	}
-
 	?>
 </div>
 
