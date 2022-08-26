@@ -6,17 +6,19 @@
     if (isset($_POST['simpan'])) {
         $tugas = $_POST['task'];
         $priority = $_POST['priority'];
-        $sql = "INSERT INTO tbl_tugas (prioritas, tugas, status) VALUES ('[$priority]', '[$tugas]', 'No Status')";
+
+        $tugas = mysqli_real_escape_string($conn, $tugas);
+        $priority = mysqli_real_escape_string($conn, $priority);
+
+        $sql = "INSERT INTO tbl_tugas (prioritas, tugas, status) VALUES ('$priority', '$tugas', 'No Status')";
         mysqli_query($conn, $sql);
     }
-    die($_POST['simpan']);
-
     if (isset($_GET['status'])) {
         if ($_GET['status'] == 1) {
             $sql = "UPDATE tbl_tugas SET status='On Progres' WHERE id=$_GET[id]";
         } else if ($_GET['status'] == 2) {
             $sql = "UPDATE tbl_tugas SET status='Cancelled' WHERE id=$_GET[id]";
-        }else if (['status'] == 3) {
+        }else if ($_GET['status'] == 3) {
             $sql = "UPDATE tbl_tugas SET status='Done' WHERE id=$_GET[id]";
         } else if ($_GET['status'] == 4) {
             $sql = "DELETE FROM tbl_tugas WHERE id=$_GET[id]";
@@ -44,14 +46,13 @@
   </div>
   <div class="col-auto">
   <select class="form-select" aria-label="Default select example" name="priority">
-  <option selected>Set Priority</option>
   <option value="High">High</option>
   <option value="Medium">Medium</option>
   <option value="Low">Low</option>
 </select>
   </div>
   <div class="col-auto">
-  <button type="button" class="btn btn-primary" name="simpan" value="simpan">Simpan</button>
+  <button type="submit" class="btn btn-primary" name="simpan" value="simpan">Simpan</button>
   </div>
 </div>
                             
