@@ -2,8 +2,25 @@
     // koneksi ke database
     $conn = mysqli_connect("localhost", "root", "", "todo");
 
+    // Add todo
+    if (isset($_POST['simpan'])) {
+        $tugas = $_POST['task'];
+        $priority = $_POST['priority'];
+        $sql = "INSERT INTO tbl_tugas (prioritas, tugas, status) VALUES ('[$priority]', '[$tugas]', 'No Status')";
+        mysqli_query($conn, $sql);
+    }
+    die($_POST['simpan']);
+
     if (isset($_GET['status'])) {
-        $sql = "UPDATE tbl_tugas SET status='On Progres' WHERE id=$_GET[id]";
+        if ($_GET['status'] == 1) {
+            $sql = "UPDATE tbl_tugas SET status='On Progres' WHERE id=$_GET[id]";
+        } else if ($_GET['status'] == 2) {
+            $sql = "UPDATE tbl_tugas SET status='Cancelled' WHERE id=$_GET[id]";
+        }else if (['status'] == 3) {
+            $sql = "UPDATE tbl_tugas SET status='Done' WHERE id=$_GET[id]";
+        } else if ($_GET['status'] == 4) {
+            $sql = "DELETE FROM tbl_tugas WHERE id=$_GET[id]";
+        }
         mysqli_query($conn, $sql);
     }
 
@@ -26,7 +43,7 @@
     <input type="text" id="" class="form-control" name="task">
   </div>
   <div class="col-auto">
-  <select class="form-select" aria-label="Default select example">
+  <select class="form-select" aria-label="Default select example" name="priority">
   <option selected>Set Priority</option>
   <option value="High">High</option>
   <option value="Medium">Medium</option>
@@ -75,10 +92,10 @@
                     <td><?= $h["tugas"] ?></td>
                     <td><?= $h["status"] ?></td>
                     <td>
-                        <a href="index.php?status=1&id<?= $baris['id']; ?>" class="btn btn-info">Start</a>
-                        <button type="button" class="btn btn-warning">Cancel</button>
-                        <button type="button" class="btn btn-success">Done</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="index.php?halaman=listdata&status=1&id=<?= $h['id']; ?>" class="btn btn-info">Start</a>
+                        <a href="index.php?halaman=listdata&status=2&id=<?= $h['id']; ?>" class="btn btn-warning">Cancel</a>
+                        <a href="index.php?halaman=listdata&status=3&id=<?= $h['id']; ?>" class="btn btn-success">Done</a>
+                        <a href="index.php?halaman=listdata&status=4&id=<?= $h['id']; ?>" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             <?php $i++; ?>
