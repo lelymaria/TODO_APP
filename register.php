@@ -1,3 +1,16 @@
+<?php
+    require 'function.php';
+    if (isset($_POST["register"])) {
+        if(registrasi($_POST)>0) {
+            echo "<script>
+                alert('User baru berhasil ditambahkan!');
+            </script>";
+        } else {
+            echo mysqli_error($conn);
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -40,7 +53,7 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.php">Create Account</a></div>
+                                                <div class="d-grid"><button class="btn btn-primary btn-block" type="submit" name="register">Create Account</button></div>
                                             </div>
                                         </form>
                                     </div>

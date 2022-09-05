@@ -1,34 +1,45 @@
 <?php
-    // koneksi ke database
-    $conn = mysqli_connect("localhost", "root", "", "todo");
+    // // koneksi ke database
+    // $conn = mysqli_connect("localhost", "root", "", "todo");
 
-    // Add todo
-    if (isset($_POST['simpan'])) {
-        $tugas = $_POST['task'];
-        $priority = $_POST['priority'];
+    // // Add todo
+    // if (isset($_POST['simpan'])) {
+    //     $tugas = $_POST['task'];
+    //     $priority = $_POST['priority'];
 
-        $tugas = mysqli_real_escape_string($conn, $tugas);
-        $priority = mysqli_real_escape_string($conn, $priority);
+    //     $tugas = mysqli_real_escape_string($conn, $tugas);
+    //     $priority = mysqli_real_escape_string($conn, $priority);
 
-        $sql = "INSERT INTO tbl_tugas (prioritas, tugas, status) VALUES ('$priority', '$tugas', 'No Status')";
-        mysqli_query($conn, $sql);
+    //     $sql = "INSERT INTO tbl_tugas (prioritas, tugas, status) VALUES ('$priority', '$tugas', 'No Status')";
+    //     mysqli_query($conn, $sql);
+    // }
+    // if (isset($_GET['status'])) {
+    //     if ($_GET['status'] == 1) {
+    //         $sql = "UPDATE tbl_tugas SET status='On Progres' WHERE id=$_GET[id]";
+    //     } else if ($_GET['status'] == 2) {
+    //         $sql = "UPDATE tbl_tugas SET status='Cancelled' WHERE id=$_GET[id]";
+    //     }else if ($_GET['status'] == 3) {
+    //         $sql = "UPDATE tbl_tugas SET status='Done' WHERE id=$_GET[id]";
+    //     } else if ($_GET['status'] == 4) {
+    //         $sql = "DELETE FROM tbl_tugas WHERE id=$_GET[id]";
+    //         echo "<script>
+    //             alert('Data berhasil dihapus!');
+    //             document.location.href = 'index.php?halaman=listdata';
+    //         </script>";
+    //     }
+    //     mysqli_query($conn, $sql);
+    // }
+
+    // // query sql
+    // $sql = "SELECT * FROM tbl_tugas";
+    // $hasil = mysqli_query($conn, $sql);
+    session_start();
+    if (!isset($_SESSION["login"])) {
+        header("Location: login.php");
     }
-    if (isset($_GET['status'])) {
-        if ($_GET['status'] == 1) {
-            $sql = "UPDATE tbl_tugas SET status='On Progres' WHERE id=$_GET[id]";
-        } else if ($_GET['status'] == 2) {
-            $sql = "UPDATE tbl_tugas SET status='Cancelled' WHERE id=$_GET[id]";
-        }else if ($_GET['status'] == 3) {
-            $sql = "UPDATE tbl_tugas SET status='Done' WHERE id=$_GET[id]";
-        } else if ($_GET['status'] == 4) {
-            $sql = "DELETE FROM tbl_tugas WHERE id=$_GET[id]";
-        }
-        mysqli_query($conn, $sql);
-    }
 
-    // query sql
-    $sql = "SELECT * FROM tbl_tugas";
-    $hasil = mysqli_query($conn, $sql);
+    require 'function.php';
+    $todo = query("SELECT * FROM tbl_tugas");
 ?>
 
 <h1 class="mt-4">List Data</h1>
