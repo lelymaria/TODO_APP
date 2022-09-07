@@ -74,7 +74,7 @@
                                             <p style="color:red; font-style: italic;">username / password salah!</p>
                                         <?php endif; ?>
                                     <div class="card-body">
-                                        <form>
+                                        <form method="POST">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" name="username" id="username" type="text" placeholder="Username" />
                                                 <label for="username">Username</label>
