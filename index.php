@@ -6,6 +6,8 @@
 
     require 'function.php';
     $todo = query("SELECT * FROM tbl_tugas");
+
+    $jumlah = mysqli_fetch_assoc($todo);
 ?>
 
 <!DOCTYPE html>

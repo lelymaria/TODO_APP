@@ -53,7 +53,17 @@
             $priority = htmlspecialchars($data["priority"]);
                 $query = "INSERT INTO tbl_tugas (prioritas, tugas, status) VALUES ('$priority', '$tugas', 'No Status')";
 
-            mysqli_query($conn, $query);
+                if (mysqli_query($conn, $query)) {
+                    echo "<script>
+                                alert('Data berhasil ditambahkan!');
+                                document.location.href = 'index.php?halaman=listdata';
+                            </script>";
+                } else {
+                    echo "<script>
+                                alert('Data berhasil ditambahkan!');
+                                document.location.href = 'index.php?halaman=listdata';
+                            </script>";
+                }
             return mysqli_affected_rows($conn);
         }
 
@@ -69,15 +79,15 @@
                     $query = "UPDATE tbl_tugas SET status='Done' WHERE id=$_GET[id]";
                 } else if ($_GET['status'] == 4) {
                     $query = "DELETE FROM tbl_tugas WHERE id=$_GET[id]";
-                    if( hapus($id) > 0) {
+                    if( $_GET['status'] == 4 > 0) {
                         echo "<script>
                                 alert('Data berhasil dihapus!');
-                                document.location.href = 'index.php';
+                                document.location.href = 'index.php?halaman=listdata';
                             </script>";
                     } else {
                         echo "<script>
                                 alert('Data gagal dihapus!');
-                                document.location.href = 'index.php';
+                                document.location.href = 'index.php?halaman=listdata';
                             </script>";
                     }
                 }

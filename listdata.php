@@ -8,23 +8,10 @@
             tambah($_POST);
         }
 
-        // if (isset($_GET['status'])) {
-        //     if ($_GET['status'] == 1) {
-        //         $query = "UPDATE tbl_tugas SET status='On Progres' WHERE id=$_GET[id]";
-        //     } else if ($_GET['status'] == 2) {
-        //         $query = "UPDATE tbl_tugas SET status='Cancelled' WHERE id=$_GET[id]";
-        //     }else if ($_GET['status'] == 3) {
-        //         $query = "UPDATE tbl_tugas SET status='Done' WHERE id=$_GET[id]";
-        //     } else if ($_GET['status'] == 4) {
-        //         $query = "DELETE FROM tbl_tugas WHERE id=$_GET[id]";
-        //         echo "<script>
-        //             alert('Data berhasil dihapus!');
-        //             document.location.href = 'index.php?halaman=listdata';
-        //         </script>";
-        //     }
-        // }
+        if (isset($_GET['status'])) {
+            status($_GET);
+        }
 
-        status($_GET);
         $hasil = query("SELECT * FROM tbl_tugas");
 ?>
 
@@ -90,10 +77,10 @@
                     <td><?= $h["tugas"] ?></td>
                     <td><?= $h["status"] ?></td>
                     <td>
-                        <a href="index.php?halaman=listdata&status=1&id=<?= $h['id']; ?>" class="btn btn-info">Start</a>
-                        <a href="index.php?halaman=listdata&status=2&id=<?= $h['id']; ?>" class="btn btn-warning">Cancel</a>
-                        <a href="index.php?halaman=listdata&status=3&id=<?= $h['id']; ?>" class="btn btn-success">Done</a>
-                        <a href="index.php?halaman=listdata&status=4&id=<?= $h['id']; ?>" class="btn btn-danger">Delete</a>
+                        <a href="index.php?halaman=listdata&status=1&id=<?= $h['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-play"></i></a>
+                        <a href="index.php?halaman=listdata&status=2&id=<?= $h['id']; ?>" class="btn btn-warning"><i class="fa-solid fa-ban"></i></a>
+                        <a href="index.php?halaman=listdata&status=3&id=<?= $h['id']; ?>" class="btn btn-success"><i class="fa-solid fa-check"></i></a>
+                        <a href="index.php?halaman=listdata&status=4&id=<?= $h['id']; ?>" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
             <?php $i++; ?>
