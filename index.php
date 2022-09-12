@@ -5,9 +5,9 @@
     }
 
     require 'function.php';
-    $todo = query("SELECT * FROM tbl_tugas");
+    $todo = $conn->query("SELECT * FROM tbl_tugas");
 
-    $jumlah = mysqli_fetch_assoc($todo);
+    $jumlah = $todo->num_rows;
 ?>
 
 <!DOCTYPE html>

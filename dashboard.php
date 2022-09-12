@@ -1,7 +1,3 @@
-<?php
-    count($jumlah);
-?>
-
 <div class="container-fluid px-4">
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
@@ -12,7 +8,7 @@
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">Total List Data</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <h5><?= count(); ?> Data</h5> 
+                                        <h5><?= $jumlah; ?> Data</h5> 
                                         <div class="small text-white"><i class="fa-solid fa-circle-info"></i></div>
                                     </div>
                                 </div>
